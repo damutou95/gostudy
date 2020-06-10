@@ -1,31 +1,52 @@
 package main
 
 import "fmt"
-
 func main(){
-	s := "hello world"
-	fmt.Print(reverseWord(s))
-
+s := "hello"
+p := "ll"
+fmt.Print(strStr(s,p))
 }
-func reverseWord(s string) string {
-	b :=[]byte(s)
-	l :=0
-	for i,v :=range s{
-		if v==' '||i==len(s)-1{
-			r :=i-1
-			if i==len(s)-1{
-				r =i
+func getNextMatrix(p string)[]int{
+	if len(p) == 0{
+		return nil
+	}
+	next := make([]int,len(p))
+	next[0] = -1
+	j := 0
+	k := -1
+	for j<len(p)-1{
+		if k == -1 || p[k] == p[j]{
+			k++
+			j++
+			if p[k] != p[j]{
+				next[j] = k
+			}else{
+				next[j] = next[k]
 			}
-			for l<r{
-				b[l],b[r] =b[r],b[l]
-				l++
-				r--
-			}
-			l=i+1
+		}else{
+			k = next[k]
 		}
 	}
-	return string(b)
+	return next
 }
-
-
-
+func strStr(haystack string, needle string) int {
+	next := getNextMatrix(needle)
+	if len(next) == 0{
+		return 0
+	}
+	i := 0
+	j := 0
+	for i<len(haystack) && j<len(needle){
+		if j== -1 || haystack[i] == needle[j]{
+			i++
+			j++
+		}else{
+			j = next[j]
+		}
+	}
+	if j==len(needle){
+		return i-j
+	}else{
+		return -1
+	}
+}
