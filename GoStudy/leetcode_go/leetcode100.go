@@ -2,23 +2,19 @@ package main
 /**
  * Definition for a binary tree node.
 */
-type TreeNode struct {
-	Val int
-	Left *TreeNode
-	Right *TreeNode
- }
-func check(p *TreeNode, q *TreeNode) bool{
-	if p == nil && q == nil{
-		return true
-	}else if p == nil || q == nil{
-		return false
-	}
-	if p.Val == q.Val{
-		return true
-	}else{
-		return false
-	}
-}
+
+//func check(p *TreeNode, q *TreeNode) bool{
+//	if p == nil && q == nil{
+//		return true
+//	}else if p == nil || q == nil{
+//		return false
+//	}
+//	if p.Val == q.Val{
+//		return true
+//	}else{
+//		return false
+//	}
+//}
 func isSameTree(p *TreeNode, q *TreeNode) bool {
 
 	if !check(p,q){
